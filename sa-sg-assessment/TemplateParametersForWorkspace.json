@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "sa-sg-assessment"
+		},
+		"SqlServer1_connectionString": {
+			"value": ""
+		},
+		"sa-sg-assessment-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:sa-sg-assessment.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"sa-sg-assessment-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://datalakesgassessment.dfs.core.windows.net"
+		}
+	}
+}
