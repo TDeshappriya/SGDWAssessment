@@ -3,10 +3,10 @@ IF OBJECT_ID('presentation.usp_DimProductCategory', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_DimProductCategory AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
         
-		DROP TABLE #TEMP;
+		
 
 		SELECT c.CategoryID,
 				c.CategoryName,
@@ -16,7 +16,7 @@ BEGIN
 		FROM hds.Categories c
 
 
-		DROP TABLE #NewRecords
+		
 
 		SELECT c.CategoryID,
 				c.CategoryName,
@@ -28,7 +28,7 @@ BEGIN
           ON c.CategoryID = pc.CategoryID
         WHERE pc.CategoryID IS NULL
 
-		DROP TABLE #UpdatedRecords
+	
 
 		SELECT c.CategoryID,
 				c.CategoryName,
@@ -59,8 +59,12 @@ BEGIN
         FROM #UpdatedRecords AS t
         WHERE [presentation].[DimProductCategory].CategoryID = t.CategoryID
 
+        
+    DROP TABLE #TEMP;
+		DROP TABLE #NewRecords;
+		DROP TABLE #UpdatedRecords;
 
-        COMMIT TRANSACTION
+        
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

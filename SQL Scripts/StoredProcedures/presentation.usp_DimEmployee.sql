@@ -3,10 +3,10 @@ IF OBJECT_ID('presentation.usp_DimEmployee', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_DimEmployee AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
         
-		DROP TABLE #TEMP;
+		
 
 		SELECT c.[EmployeeID],
 				c.[LastName],
@@ -57,8 +57,7 @@ BEGIN
 
 
 
-
-		DROP TABLE #NewRecords
+		
 
 		SELECT c.[EmployeeID],
 				c.[LastName],
@@ -86,7 +85,7 @@ BEGIN
           ON c.[EmployeeID] = pc.[EmployeeID]
         WHERE pc.[EmployeeID] IS NULL
 
-		DROP TABLE #UpdatedRecords
+		
 
 		SELECT c.[EmployeeID],
 				c.[LastName],
@@ -199,8 +198,10 @@ BEGIN
         FROM #UpdatedRecords AS t
         WHERE [presentation].[DimEmployee].[EmployeeID] = t.[EmployeeID]
 
-
-        COMMIT TRANSACTION
+		DROP TABLE #TEMP;
+		DROP TABLE #NewRecords;
+		DROP TABLE #UpdatedRecords;
+        
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

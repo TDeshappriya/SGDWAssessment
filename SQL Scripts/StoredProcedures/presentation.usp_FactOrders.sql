@@ -3,7 +3,7 @@ IF OBJECT_ID('presentation.usp_FactOrders', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_FactOrders AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
 
 
@@ -69,7 +69,7 @@ BEGIN
 		WHERE dd1.DateSK > @MaxDateSK
 
 
- COMMIT TRANSACTION
+ 
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

@@ -4,7 +4,7 @@ IF OBJECT_ID('presentation.usp_DimDate', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_DimDate AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
 
 	TRUNCATE TABLE [presentation].[DimDate]
@@ -81,7 +81,7 @@ BEGIN
 		
 		DROP TABLE dbo.TempDateDimension;
 
-        COMMIT TRANSACTION
+        
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

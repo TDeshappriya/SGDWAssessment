@@ -3,7 +3,7 @@ IF OBJECT_ID('presentation.usp_FactProductStock', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_FactProductStock AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
 
 	TRUNCATE TABLE presentation.FactProductStock
@@ -29,7 +29,7 @@ BEGIN
 	INNER JOIN presentation.DimProduct dp
 	ON p.ProductId = dp.ProductID
 
-COMMIT TRANSACTION
+
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

@@ -3,10 +3,10 @@ IF OBJECT_ID('presentation.usp_DimProduct', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_DimProduct AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
         
-		DROP TABLE #TEMP;
+		
 
 		SELECT c.[ProductID],
 				c.[ProductName],
@@ -17,7 +17,7 @@ BEGIN
 		FROM hds.Products c
 
 
-		DROP TABLE #NewRecords
+		
 
 		SELECT  c.[ProductID],
 				c.[ProductName],
@@ -30,7 +30,7 @@ BEGIN
           ON c.[ProductID] = pc.[ProductID]
         WHERE pc.[ProductID] IS NULL
 
-		DROP TABLE #UpdatedRecords
+		
 
 		SELECT c.[ProductID],
 				c.[ProductName],
@@ -66,8 +66,10 @@ BEGIN
         FROM #UpdatedRecords AS t
         WHERE [presentation].[DimProduct].[ProductID] = t.[ProductID]
 
-
-        COMMIT TRANSACTION
+		DROP TABLE #TEMP;	
+		DROP TABLE #NewRecords;
+		DROP TABLE #UpdatedRecords;
+        
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

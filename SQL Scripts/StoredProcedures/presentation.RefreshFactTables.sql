@@ -7,8 +7,8 @@ BEGIN
     BEGIN TRY
 
 
-		EXEC hds.usp_FactOrders;
-		EXEC hds.usp_FactProductStock;
+		EXEC presentation.usp_FactOrders;
+		EXEC presentation.usp_FactProductStock;
 
         
     END TRY  

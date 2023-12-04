@@ -4,10 +4,10 @@ IF OBJECT_ID('presentation.usp_DimCustomer', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_DimCustomer AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
         
-		DROP TABLE #TEMP;
+		
 
 		SELECT c.[CustomerID],
 				c.[CompanyName],
@@ -139,8 +139,8 @@ BEGIN
 		WHERE
 			d.IsActive = 0;
 
-
-        COMMIT TRANSACTION
+		DROP TABLE #TEMP;
+        
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0

@@ -3,10 +3,10 @@ IF OBJECT_ID('presentation.usp_DimSuppliers', 'P') IS NOT NULL
 GO
 CREATE PROCEDURE presentation.usp_DimSuppliers AS
 BEGIN
-    BEGIN TRANSACTION
+    
     BEGIN TRY
         
-		DROP TABLE #TEMP;
+		
 
 		SELECT c.[SupplierID],
 				c.[CompanyName],
@@ -26,7 +26,7 @@ BEGIN
 	
 
 
-		DROP TABLE #NewRecords
+		
 
 		SELECT c.[SupplierID],
 				c.[CompanyName],
@@ -47,7 +47,7 @@ BEGIN
           ON c.[SupplierID] = pc.[SupplierID]
         WHERE pc.[SupplierID] IS NULL
 
-		DROP TABLE #UpdatedRecords
+	
 
 		SELECT c.[SupplierID],
 				c.[CompanyName],
@@ -126,7 +126,10 @@ BEGIN
         WHERE [presentation].[DimSuppliers].[SupplierID] = t.[SupplierID]
 
 
-        COMMIT TRANSACTION
+		DROP TABLE #TEMP;
+		DROP TABLE #NewRecords;
+		DROP TABLE #UpdatedRecords;
+        
     END TRY  
     BEGIN CATCH
         IF @@TRANCOUNT > 0
