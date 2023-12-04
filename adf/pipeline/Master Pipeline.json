@@ -1,0 +1,61 @@
+{
+	"name": "Master Pipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "Source to Staging",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Source_To_Staging",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Staging to HDS",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Source to Staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Staging_To_HDS",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Load Presentation",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Staging to HDS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "HDS_To_Presentation",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
