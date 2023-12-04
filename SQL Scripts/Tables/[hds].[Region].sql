@@ -1,0 +1,9 @@
+CREATE TABLE [hds].[Region]
+(
+	[RegionID] INT NOT NULL,
+	[RegionDescription] VARCHAR(4000) NULL,
+	[EtlInsertTime] DATETIME2 (7) NULL
+) WITH (
+    DISTRIBUTION = HASH ([RegionID]),
+    CLUSTERED COLUMNSTORE INDEX
+)

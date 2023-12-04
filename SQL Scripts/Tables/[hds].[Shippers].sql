@@ -1,0 +1,10 @@
+CREATE TABLE [hds].[Shippers]
+(
+	[ShipperID] INT NOT NULL,
+	[CompanyName] VARCHAR(40) NULL,
+	[Phone] VARCHAR(30) NULL,
+	[EtlInsertTime] DATETIME2 (7) NULL
+) WITH (
+    DISTRIBUTION = HASH ([ShipperID]),
+    CLUSTERED COLUMNSTORE INDEX
+)
