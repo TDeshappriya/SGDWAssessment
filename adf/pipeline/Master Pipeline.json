@@ -8,6 +8,10 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Source_To_Staging",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			},
